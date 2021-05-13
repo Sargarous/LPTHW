@@ -20,13 +20,13 @@ five = 10 - 2 + 3 - 6
 print(f"This should be five: {five}")
 
 def secret_formula(started):
-    jelly_beans = started * 500
-    jars = jelly_beans / 1000
-    crates = jars / 100
+    jars = started * 9
+    jelly_beans = jars / 2
+    crates = jars *4
     return jelly_beans, jars, crates
 
 
-start_point = 10000
+start_point = 1
 beans, jars, crates = secret_formula(start_point)
 
 #remember that this is another way to format a string
