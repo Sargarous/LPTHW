@@ -1,6 +1,6 @@
 import random
 #ptint animals from list in random order
-animals = ['bear', 'python', 'peacock', 'kangoo', 'whale']
+animals = ['Bear', 'Python', 'Peacock', 'Kangoo', 'Whale']
 printed_ind = []
 count = len(animals)
 while count > 0:

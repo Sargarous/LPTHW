@@ -3,6 +3,7 @@ cats = 30
 dogs = 15
 
 if people < cats:
+    print(people)
     print("Too many cats! The world is doomed!")
 
 if people > cats:
