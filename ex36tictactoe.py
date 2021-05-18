@@ -6,10 +6,11 @@ from typing import List
 
 field_rows = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
 # field_rows = [['X', 'Z', '3'], ['C', 'H', 'P'], ['7', "1", '9']]
-
+#return random number in range
 def randomizer(min, max):
     return random.randint(min, max)
 
+#game mode selector(PvP or PvMachine)
 def start():
     print("\t\tTic Tac Toe\n\t\t Menu:\n1.Player vs Player\n2.Player vs machine.")
     while True:
@@ -38,10 +39,11 @@ def start():
             print("Try again.")
     return(game_mode)
 
+#draw game field in com.line
 def playing_field_display():
     list_as_array = np.array(field_rows)
     print(list_as_array)
-
+#player name input
 def pre_game_prep():
     print("Type Player 1 name: ")
     P1_name = input("> ")
@@ -53,7 +55,7 @@ def pre_game_prep():
         return(P1_name, "Io")
     else :
         return(P1_name, "Hellios")
-
+#first move coin flip
 def who_move_first():
     print("First goes: ")
     progress_bar()
@@ -64,14 +66,14 @@ def who_move_first():
         first = P2
         print(P2)
     return (first)
-
+#fancy stuff
 def progress_bar():
     i = 0
     while i < 10:
         time.sleep(randomizer(0, 1))
         print("-", sep = ' ', end = '', flush = True)
         i += 1
-
+#set O or X in selected position(1-9)
 def field_setter(matrix: List[List[str]], lst_value: str,
                   new_value: str) -> List:
     for sub_lst in field_rows:
@@ -80,7 +82,7 @@ def field_setter(matrix: List[List[str]], lst_value: str,
             sub_lst[value_index] = new_value
             return field_rows
     return field_rows
-
+#check field for 3-in-a-row
 def victory_check(lst):
     winner = ''
     for i in range(0, 3):
@@ -95,7 +97,7 @@ def victory_check(lst):
         winner = lst[0][2]
     return winner
 
-
+#main method, assemble values and queue players turns
 def gameplay(P1, P2, first_move):
     p1_sign = 'X'
     p2_sign = 'O'
@@ -136,7 +138,7 @@ def gameplay(P1, P2, first_move):
                 print(f"Sad for you, mr.{p1}")
                 break
 
-
+#simple randomized action bot
 def io_bot(field_rows):
     while True:
         io_turn = str(randomizer(1, 9))
