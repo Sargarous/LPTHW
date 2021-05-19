@@ -5,7 +5,7 @@ import numpy as np
 from typing import List
 
 field_rows = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
-# field_rows = [['X', 'Z', '3'], ['C', 'H', 'P'], ['7', "1", '9']]
+# field_rows = [['X', 'Z', '3'], ['2', 'X', 'P'], ['7', "1", '9']]
 #return random number in range(z, y)
 def randomizer(min, max):
     return random.randint(min, max)
@@ -131,11 +131,11 @@ def gameplay(P1, P2, first_move):
             if  winner == p1_sign:
                 print(f"Congrts, {p1} is winner of this match!")
                 print(f"Sad for you, mr.{p2}")
-                continue
+                break
             elif winner == p2_sign:
                 print(f"Congrts, {p2} is winner of this match!")
                 print(f"Sad for you, mr.{p1}")
-                continue
+                break
             elif not winner and i == 8:
                 print("Draw!")
 
@@ -172,33 +172,41 @@ def Hellios_bot(field_rows):
 #check for two in a row and empty third
 def win_turn_avaible(lst):
     print('Gocha!!!')
-    flag = True
-    win_turn = ''
-    for i in range(0, 3):
 #horizon check
+    for i in range(0, 3):
         if (lst[i][0] == lst[i][1] and lst[i][2] != 'X' and lst[i][2] != 'O'):
             return lst[i][2]
         elif (lst[i][2] == lst[i][1] and lst[i][0] != 'X' and lst[i][0] != 'O'):
             return lst[i][0]
+    #horrizon opposit check
+        elif (lst[i][0] == lst[i][2] and lst[i][1] != 'X' and lst[i][2] != 'O'):
+            return lst[i][1]
 #vertical check
     for j in range(0, 3):
         if (lst[0][j] == lst[1][j] and lst[2][j] != 'X' and lst[2][j] != 'O'):
             return lst[2][j]
         elif (lst[1][j] == lst[2][j] and lst[0][j] != 'X' and lst[0][j] != 'O'):
             return lst[0][j]
+    #vertical opposit check
+        elif (lst[0][j] == lst[2][j] and lst[1][j] != 'X' and lst[1][j] != 'O'):
+            return lst[1][j]
 #diagonal left up start check
     if (lst[0][0] == lst[1][1] and lst[2][2] != 'X' and lst[2][2] != 'O'):
         return lst[2][2]
     elif (lst[1][1] == lst[2][2] and lst[0][0] != 'X' and lst[0][0] != 'O'):
         return lst[0][0]
+    elif (lst[0][0] == lst[2][2] and lst[1][1] != 'X' and lst[1][1] != 'O'):
+        return lst[1][1]
 #diag right up start
-    if (lst[0][2] == lst[1][1] and [2][0] != 'X' and lst[2][0] != 'O'):
+    if (lst[0][2] == lst[1][1] and lst[2][0] != 'X' and lst[2][0] != 'O'):
         return lst[2][0]
-    if (lst[2][0] == lst[1][1] and [0][2] != 'X' and lst[0][2] != 'O'):
+    elif (lst[2][0] == lst[1][1] and lst[0][2] != 'X' and lst[0][2] != 'O'):
         return lst[0][2]
+    elif (lst[2][0] == lst[0][2] and lst[1][1] != 'X' and lst[1][1] != 'O'):
+        return lst[1][1]
 
 
-# print(io_bot(field_rows))
+# print(win_turn_avaible(field_rows))
 game_mode = start()
 P1, P2 = pre_game_prep()
 first_move = who_move_first()
