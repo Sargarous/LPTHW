@@ -86,14 +86,14 @@ def victory_check(lst):
     winner = ''
     for i in range(0, 3):
         if (lst[i][0] == lst[i][1] and lst[i][0] == lst[i][2]):
-            winner = lst[i][0]
+            return lst[i][0]
     for j in range(0, 3):
         if (lst[0][j] == lst[1][j] and lst[0][j] == lst[2][j]):
-            winner = lst[0][j]
+            return lst[0][j]
     if (lst[0][0] == lst[1][1] and lst[0][0] == lst[2][2]):
-        winner = lst[0][0]
+        return lst[0][0]
     if (lst[0][2] == lst[1][1] and lst[0][2] == lst[2][0]):
-        winner = lst[0][2]
+        return lst[0][2]
     return winner
 
 #main method, assemble values and queue players turns
@@ -172,18 +172,31 @@ def Hellios_bot(field_rows):
 #check for two in a row and empty third
 def win_turn_avaible(lst):
     print('Gocha!!!')
+    flag = True
     win_turn = ''
     for i in range(0, 3):
+#horizon check
         if (lst[i][0] == lst[i][1] and lst[i][2] != 'X' and lst[i][2] != 'O'):
-            win_turn = lst[i][0]
+            return lst[i][2]
+        elif (lst[i][2] == lst[i][1] and lst[i][0] != 'X' and lst[i][0] != 'O'):
+            return lst[i][0]
+#vertical check
     for j in range(0, 3):
         if (lst[0][j] == lst[1][j] and lst[2][j] != 'X' and lst[2][j] != 'O'):
-            win_turn = lst[2][j]
+            return lst[2][j]
+        elif (lst[1][j] == lst[2][j] and lst[0][j] != 'X' and lst[0][j] != 'O'):
+            return lst[0][j]
+#diagonal left up start check
     if (lst[0][0] == lst[1][1] and lst[2][2] != 'X' and lst[2][2] != 'O'):
-        win_turn = lst[0][0]
+        return lst[2][2]
+    elif (lst[1][1] == lst[2][2] and lst[0][0] != 'X' and lst[0][0] != 'O'):
+        return lst[0][0]
+#diag right up start
     if (lst[0][2] == lst[1][1] and [2][0] != 'X' and lst[2][0] != 'O'):
-        win_turn = lst[2][0]
-    return win_turn
+        return lst[2][0]
+    if (lst[2][0] == lst[1][1] and [0][2] != 'X' and lst[0][2] != 'O'):
+        return lst[0][2]
+
 
 # print(io_bot(field_rows))
 game_mode = start()
