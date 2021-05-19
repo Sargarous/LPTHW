@@ -102,11 +102,9 @@ def gameplay(P1, P2, first_move):
     p2_sign = 'O'
     p1 = P1
     p2 = P2
-    p1_turn = True
     if first_move == P2:
         p1 = P2
         p2 = P1
-        p1_turn = False
     playing_field_display()
     for i in range(0, 9):
             if i%2 == 0:
@@ -139,6 +137,13 @@ def gameplay(P1, P2, first_move):
             elif not winner and i == 8:
                 print("Draw!")
 
+#use a different script depending on the selected difficulty
+def bot_activator():
+    if game_mode == 2:
+        return io_bot(field_rows)
+    elif game_mode == 3:
+        return Hellios_bot(field_rows)
+
 #simple randomized action bot
 def io_bot(field_rows):
     while True:
@@ -148,21 +153,13 @@ def io_bot(field_rows):
                 if (val == io_turn):
                     return io_turn
 
-def bot_activator():
-    if game_mode == 2:
-        print('Io')
-        return io_bot(field_rows)
-    elif game_mode == 3:
-        print('Hell')
-        return Hellios_bot(field_rows)
-
-        #advanced bot, smart as hell, sharp as edge, sting like a bee etc.
+#advanced bot, smart as hell, sharp as edge, stings like a bee and etc.
 def Hellios_bot(field_rows):
-    while True:
-        hellios_turn = win_turn_avaible(field_rows)
-        if hellios_turn:
-            return hellios_turn
-        else:
+    hellios_turn = win_turn_avaible(field_rows)
+    if hellios_turn:
+        return hellios_turn
+    else:
+        while True:
             hellios_turn = str(randomizer(1, 9))
             for row in field_rows:
                 for val in row:
@@ -171,7 +168,6 @@ def Hellios_bot(field_rows):
 
 #check for two in a row and empty third
 def win_turn_avaible(lst):
-    print('Gocha!!!')
 #horizon check
     for i in range(0, 3):
         if (lst[i][0] == lst[i][1] and lst[i][2] != 'X' and lst[i][2] != 'O'):
@@ -206,7 +202,6 @@ def win_turn_avaible(lst):
         return lst[1][1]
 
 
-# print(win_turn_avaible(field_rows))
 game_mode = start()
 P1, P2 = pre_game_prep()
 first_move = who_move_first()
