@@ -21,3 +21,14 @@ print(stuff[-1])
 print(stuff.pop())
 print(' '.join(stuff))
 print('#'.join(stuff))
+
+lst = []
+lst.append("Ex")
+lst.extend(ten_things)
+lst.insert(3, "Dread")
+lst.remove("Apples")
+#delete index 0 value and return it, Ex no more
+print(lst.pop([0]))
+#return 1st "Oranges" in list from ind 0 till len-1 or any other
+lst.list.index("Oranges",[0[,(lst.len-1)]])
+lst.count(x)
