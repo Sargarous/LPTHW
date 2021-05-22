@@ -40,18 +40,21 @@ for state, abbrev in list(states.items()):
 
 #print every sity in state
 print('-' * 10)
-for abbrev, city in list(cities.items())
-print('-' * 10)
-for state, abbrev in list(states.item()):
-    print(f"{state} state is abbreviated {abbrev}")
-    print(f"and has city {cities[abbrev]})
+for abbrev, city in list(cities.items()):
+    print(f"{abbrev} has the city {city}")
 
+#now do both
 print('-' * 10)
+for state, abbrev in list(states.items()):
+    print(f"{state} state is abbreviated {abbrev}")
+    print(f"and has city {cities[abbrev]}")
+
 #safely get a abbtrbietion by state that might not be there
+print('-' * 10)
 state = states.get("Texas")
 if not state:
     print("Sorry, no Texas")
 
 #get a city with a default value
 city = cities.get("TX", "Does Not Exist")
-print(f"The city fot the state "TX" is: {city})
+print(f"The city fot the state 'TX' is: {city}")
