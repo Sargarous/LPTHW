@@ -166,7 +166,7 @@ def Hellios_bot(field_rows):
                     if (val == hellios_turn):
                         return hellios_turn
 
-#check for two in a row and empty third
+#check for two same and empty third
 def win_turn_avaible(lst):
 #horizon check
     for i in range(0, 3):
@@ -174,7 +174,7 @@ def win_turn_avaible(lst):
             return lst[i][2]
         elif (lst[i][2] == lst[i][1] and lst[i][0] != 'X' and lst[i][0] != 'O'):
             return lst[i][0]
-    #horrizon opposit check
+    #horrizon opposit check x 2 x
         elif (lst[i][0] == lst[i][2] and lst[i][1] != 'X' and lst[i][2] != 'O'):
             return lst[i][1]
 #vertical check
