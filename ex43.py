@@ -2,17 +2,18 @@ from sys import exit
 from random import randint
 from textwrap import dedent
 
-class Enter(self):
-    ptint("This scene is not yet configured.")
-    print("Subclass it and implement enter().")
-    exit(1)
+class Scene(object):
+    def Enter(self):
+        ptint("This scene is not yet configured.")
+        print("Subclass it and implement enter().")
+        exit(1)
 
 class Engine(object):
     def __init__(self, scene_map):
         self.scene_map = scene_map
 
     def play(self):
-        current_scene = self.scene.scene_map.opening_scene()
+        current_scene = self.scene_map.opening_scene()
         last_scene = self.scene_map.next_scene('finished')
 
         while current_scene != last_scene:
@@ -106,11 +107,12 @@ class LaserWeaponArmory(Scene):
             the lock closes forever and you can't get the bomb. The
             code is 3 digits.
             """))
-        code = f"{radint(1, 3)}{radint(1, 3)}{radint(1, 3)}"
+        code = f"{randint(0, 1)}{randint(0, 1)}{randint(0, 1)}"
+        print(code)
         guess = input("[keypad]> ")
         guesses = 0
 
-        while guess != code and guesse < 10:
+        while guess != code and guesses < 10:
             print("BZZZZZEDDD!")
             guesses += 1
             guess = input("[keypad]> ")
@@ -177,27 +179,28 @@ class EscapePod(Scene):
             """))
 
         good_pod = randint(1, 5)
+        print(good_pod)
         guess = input("[pod #]> ")
 
-    if int(guess) != good_pod:
-        print(dedent("""
-            You jump into pod {guess} and hit the eject button.
-            The pod escapes out into the void of space, then
-            implodes as the hull ruptures, crushing you body into
-            jam jelly.
-            """))
-        return 'death'
-    else:
-        print(dedent("""
-            You jump into pod {guess} and hit the eject button.
-            The pod easely slided out into space heading to the
-            planet below. As it flies to the planet, you look
-            back and see your ship implode then explode like a
-            bright star, taking out the Gothon ship at the same
-            time. You won!
-            """))
+        if int(guess) != good_pod:
+            print(dedent("""
+                You jump into pod {guess} and hit the eject button.
+                The pod escapes out into the void of space, then
+                implodes as the hull ruptures, crushing you body into
+                jam jelly.
+                """))
+            return 'death'
+        else:
+            print(dedent("""
+                You jump into pod {guess} and hit the eject button.
+                The pod easely slided out into space heading to the
+                planet below. As it flies to the planet, you look
+                back and see your ship implode then explode like a
+                bright star, taking out the Gothon ship at the same
+                time. You won!
+                """))
 
-        return 'finished'
+            return 'finished'
 
 class Finished(Scene):
 
@@ -207,7 +210,25 @@ class Finished(Scene):
 
 class Map(object):
 
-    scene = {
-        'central_corridor':CentralCorridor()
-        'laser_weapon_armory'
+    scenes = {
+        'central_corridor': CentralCorridor(),
+        'laser_weapon_armory': LaserWeaponArmory(),
+        'the_bridge': TheBridge(),
+        'escape_pod': EscapePod(),
+        'death': Death(),
+        'finished': Finished()
     }
+
+    def __init__(self, start_scene):
+        self.start_scene = start_scene
+
+    def next_scene(self, scene_name):
+        val = Map.scenes.get(scene_name)
+        return val
+
+    def opening_scene(self):
+        return self.next_scene(self.start_scene)
+
+a_map = Map('central_corridor')
+a_game = Engine(a_map)
+a_game.play()
