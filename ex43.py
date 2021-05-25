@@ -8,19 +8,34 @@ class Scene(object):
         print("Subclass it and implement enter().")
         exit(1)
 
+
 class Engine(object):
+# В параметре прилетел обьект класса Мар с параметром central_corridor,
+#теперь можно вызывать методы из Мар прямо тут
     def __init__(self, scene_map):
         self.scene_map = scene_map
-
+# scene_map = Map('central_corridor')
     def play(self):
+        #current_scene = Map('central_corridor').opening_scene() = CentralCorridor()
         current_scene = self.scene_map.opening_scene()
+        #last_scene = Map('finished').opening_scene() = Finished()
         last_scene = self.scene_map.next_scene('finished')
 
+# пока current_scene не next_scene('finished'),'finished' возвращает сам Finished()
         while current_scene != last_scene:
+            # next_scene_name = CentralCorridor().enter()
+            # enter() - единствтенный метод CentralCorridor(), вся логика там
+            # в next_scene_name, в зависимости от результата, мы получаем либо
+            # 'death' либо 'следующую сцену'
             next_scene_name = current_scene.enter()
+            # присваиваем смерть\след.сцену и цикл проверяет 'finished' это или
+            # еще нет, у 'death' стоит exit(1),  который после принта завершает
+            # весь скрипт 
             current_scene = self.scene_map.next_scene(next_scene_name)
 
         # be sure to print the last scene
+        #при while финиш=финиш цикл не запустится и сам финиш придется запускать
+        #отдельной строкой вне цикла
         current_scene.enter()
 class Death(Scene):
 
@@ -218,7 +233,7 @@ class Map(object):
         'death': Death(),
         'finished': Finished()
     }
-
+ # (1) прилетел central_corridor первым
     def __init__(self, start_scene):
         self.start_scene = start_scene
 
@@ -228,7 +243,8 @@ class Map(object):
 
     def opening_scene(self):
         return self.next_scene(self.start_scene)
-
+# создали обьект класса Мар с параметром "central_corridor"
 a_map = Map('central_corridor')
+# создали обьект класса Engine и передали через параметр обьект Мар что выше
 a_game = Engine(a_map)
 a_game.play()
