@@ -30,7 +30,7 @@ class Engine(object):
             next_scene_name = current_scene.enter()
             # присваиваем смерть\след.сцену и цикл проверяет 'finished' это или
             # еще нет, у 'death' стоит exit(1),  который после принта завершает
-            # весь скрипт 
+            # весь скрипт
             current_scene = self.scene_map.next_scene(next_scene_name)
 
         # be sure to print the last scene
@@ -127,7 +127,7 @@ class LaserWeaponArmory(Scene):
         guess = input("[keypad]> ")
         guesses = 0
 
-        while guess != code and guesses < 10:
+        while guess != code and guesses < 9:
             print("BZZZZZEDDD!")
             guesses += 1
             guess = input("[keypad]> ")
