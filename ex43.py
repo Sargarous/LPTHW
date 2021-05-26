@@ -3,7 +3,7 @@ from random import randint
 from textwrap import dedent
 
 class Scene(object):
-    def Enter(self):
+    def enter(self):
         ptint("This scene is not yet configured.")
         print("Subclass it and implement enter().")
         exit(1)
