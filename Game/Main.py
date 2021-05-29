@@ -1,16 +1,16 @@
+import os
 from sys import dexterity
 from random import randint
 from textwrap import dedent
 
 class Save(object):
-    def __init__(self, arg):
-        super(Save, self).__init__()
+    def __init__(self, file_name):
+        file = os.scandir('game/')
 
 class Death(Locations):
         def start_location():
             print("You are died!")
             exit(1)
-
 
 class Engine(object):
 
@@ -28,8 +28,12 @@ class Engine(object):
 
 
 class Character(object):
-    pass
 
+    def __init__(self, name, strength, health, dexterity):
+        self.name = name
+        self.strength = strength
+        self.health = health
+        self.dexterity = dexterity
 
 class Player(Character):
 
@@ -71,15 +75,20 @@ class Locations(object):
         exit(1)
 
 class 1-1(Locations):
-    pass
+    def start_location(self):
+        print("1st Enemy")
 
 class 1-2(Locations):
-    pass
+    def start_location(self):
+        print("2st Enemy")
 
 class 1-3(Locations):
-    pass
+    def start_location(self):
+        print("3st Enemy")
 
 class Boss(Character)
+    def start_location(self):
+        print("Boss")
 
 print("""Bug ugly troll stand before you and u can smell his rotten breath.
         It take some thime before he notice you and turn his head in your
