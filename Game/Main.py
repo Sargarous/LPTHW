@@ -1,11 +1,35 @@
-class Save(object):
+from sys import dexterity
+from random import randint
+from textwrap import dedent
 
+class Save(object):
     def __init__(self, arg):
         super(Save, self).__init__()
+
+class Death(Locations):
+        def start_location():
+            print("You are died!")
+            exit(1)
+
+
+class Engine(object):
+
+    def __init__(self, location_map):
+        self.location_map = location_map
+
+    def play(self):
+        current_location = self.location_map.start_next_location()
+
+        last_location = self.location_map.start_next_location('last_boss')
+
+        while current_location != last_location:
+            next_loc_name = current_location.enter()
+            current_location = self.location_map.next_location_val(next_loc_name)
 
 
 class Character(object):
     pass
+
 
 class Player(Character):
 
@@ -19,14 +43,32 @@ class Enemy(Character):
 
 class Map(object):
 
-    def __init__(self, arg):
-        super(Map, self).__init__()
+    locations = {
+        '1-1':Loc11(),
+        '1-2':Loc12(),
+        '1-3':Loc13(),
+        '2-1':Loc21(),
+        '2-2':Loc22(),
+        '2-3':Loc23(),
+        '3-1':Loc31(),
+        '3-2':Loc32(),
+        '3-3':Loc33(),
+        'last_boss':LocLast()
+    }
+    def __init__(self, next_location):
+        self.next_location = next_location
+
+    def next_location_val(self, location_name):
+        loc = Map.locations.get(location_name)
+
+    def start_next_location():
+        return self.location_name(self.next_location)
 
 class Locations(object):
 
-    def __init__(self, arg):
-        super(Locations, self).__init__()
-        rooms = {'first':'1-1'}
+    def start_location():
+        print("Error!")
+        exit(1)
 
 class 1-1(Locations):
     pass
@@ -49,5 +91,5 @@ print("""Bug ugly troll stand before you and u can smell his rotten breath.
         a hero or snack for this creature.
         With a corner of you eyes you saw a swirt blink, you jump backward and
         was rly surprised by dexterity and speed of creature of this size. Time
-        for final fight!  
+        for final fight!
     """)
