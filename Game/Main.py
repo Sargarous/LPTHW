@@ -7,11 +7,6 @@ class Save(object):
     def __init__(self, file_name):
         file = os.scandir('game/')
 
-class Death(Locations):
-        def start_location():
-            print("You are died!")
-            exit(1)
-
 class Engine(object):
 
     def __init__(self, location_map):
@@ -57,7 +52,10 @@ class Map(object):
         '3-1':Loc31(),
         '3-2':Loc32(),
         '3-3':Loc33(),
-        'last_boss':LocLast()
+        'last_boss':LastBoss(),
+        'death':Death(),
+        'last_location':TheEnd()
+
     }
     def __init__(self, next_location):
         self.next_location = next_location
@@ -74,31 +72,80 @@ class Locations(object):
         print("Error!")
         exit(1)
 
+class Death(Locations):
+        def start_location():
+            print("You are died!")
+            exit(1)
+
 class 1-1(Locations):
     def start_location(self):
         print("1st Enemy")
+        return('1-2')
 
 class 1-2(Locations):
     def start_location(self):
         print("2st Enemy")
+        return('1-3')
+
 
 class 1-3(Locations):
     def start_location(self):
-        print("3st Enemy")
+        print("Boss_1")
+        return('2-1')
 
-class Boss(Character)
+class 2-1(Locations):
+    def start_location(self):
+        print("3st Enemy")
+        return('2-2')
+
+class 2-2(Locations):
+    def start_location(self):
+        print("3st Enemy")
+        return('2-3')
+
+class 2-3(Locations):
+    def start_location(self):
+        print("Boss_2")
+        return('3-1')
+
+class 3-1(Locations):
+    def start_location(self):
+        print("3st Enemy")
+        return('3-2')
+
+class 3-2(Locations):
+    def start_location(self):
+        print("Boss_3")
+        return('3-3')
+
+class 3-3(Locations):
+    def start_location(self):
+        print("3st Enemy")
+        return('last_boss')
+
+class LastBoss(Character):
     def start_location(self):
         print("Boss")
+        print("""Bug ugly troll stand before you and u can smell his rotten breath.
+                It take some thime before he notice you and turn his head in your
+                direction. Seems he studiyng you for some time and you almost can swear
+                that for breef of moment you saw grimm smile on his face.
+                While you draw your sword you notice giant pon on fire behind him and
+                somting familiar in this pot. In next second you realise that is a
+                humans foot and part of head. No time for hesitation, you ither will be
+                a hero or snack for this creature.
+                With a corner of you eyes you saw a swirt blink, you jump backward and
+                was rly surprised by dexterity and speed of creature of this size. Time
+                for final fight!
+            """)
 
-print("""Bug ugly troll stand before you and u can smell his rotten breath.
-        It take some thime before he notice you and turn his head in your
-        direction. Seems he studiyng you for some time and you almost can swear
-        that for breef of moment you saw grimm smile on his face.
-        While you draw your sword you notice giant pon on fire behind him and
-        somting familiar in this pot. In next second you realise that is a
-        humans foot and part of head. No time for hesitation, you ither will be
-        a hero or snack for this creature.
-        With a corner of you eyes you saw a swirt blink, you jump backward and
-        was rly surprised by dexterity and speed of creature of this size. Time
-        for final fight!
-    """)
+class TheEnd(Locations):
+    def start_location(self):
+        print("Congrats, you beat the game!")
+        return('last_location')
+
+
+##runner
+start = Map('1-1')
+start_engine = Engine(start)
+start_engine.play()
