@@ -1,5 +1,5 @@
 import os
-from sys import dexterity
+from sys import exit
 from random import randint
 from textwrap import dedent
 
@@ -13,23 +13,27 @@ class Engine(object):
         self.location_map = location_map
 
     def play(self):
+        i = 0
         current_location = self.location_map.start_next_location()
-
-        last_location = self.location_map.start_next_location('last_boss')
-
+        print(current_location)
+        last_location = self.location_map.next_location_val('last_location')
+        print(last_location)
         while current_location != last_location:
+            print(i)
             next_loc_name = current_location.enter()
             current_location = self.location_map.next_location_val(next_loc_name)
+            print(i)
+            i += 1
 
 
 class Character(object):
 
-    def __init__(self, name, strength, health, dexterity):
-        self.name = name
-        self.strength = strength
-        self.health = health
-        self.dexterity = dexterity
-
+    # def __init__(self, name, strength, health, dexterity):
+    #     self.name = name
+    #     self.strength = strength
+    #     self.health = health
+    #     self.dexterity = dexterity
+    pass
 class Player(Character):
 
     def __init__(self, arg):
@@ -40,31 +44,6 @@ class Enemy(Character):
     def __init__(self, arg):
         super(Enemy, self).__init__()
 
-class Map(object):
-
-    locations = {
-        '1-1':Loc11(),
-        '1-2':Loc12(),
-        '1-3':Loc13(),
-        '2-1':Loc21(),
-        '2-2':Loc22(),
-        '2-3':Loc23(),
-        '3-1':Loc31(),
-        '3-2':Loc32(),
-        '3-3':Loc33(),
-        'last_boss':LastBoss(),
-        'death':Death(),
-        'last_location':TheEnd()
-
-    }
-    def __init__(self, next_location):
-        self.next_location = next_location
-
-    def next_location_val(self, location_name):
-        loc = Map.locations.get(location_name)
-
-    def start_next_location():
-        return self.location_name(self.next_location)
 
 class Locations(object):
 
@@ -73,52 +52,52 @@ class Locations(object):
         exit(1)
 
 class Death(Locations):
-        def start_location():
-            print("You are died!")
-            exit(1)
+    def start_location():
+        print("You are died!")
+        exit(1)
 
-class 1-1(Locations):
+class Loc11(Locations):
     def start_location(self):
         print("1st Enemy")
         return('1-2')
 
-class 1-2(Locations):
+class Loc12(Locations):
     def start_location(self):
         print("2st Enemy")
         return('1-3')
 
 
-class 1-3(Locations):
+class Loc13(Locations):
     def start_location(self):
         print("Boss_1")
         return('2-1')
 
-class 2-1(Locations):
+class Loc21(Locations):
     def start_location(self):
         print("3st Enemy")
         return('2-2')
 
-class 2-2(Locations):
+class Loc22(Locations):
     def start_location(self):
         print("3st Enemy")
         return('2-3')
 
-class 2-3(Locations):
+class Loc23(Locations):
     def start_location(self):
         print("Boss_2")
         return('3-1')
 
-class 3-1(Locations):
+class Loc31(Locations):
     def start_location(self):
         print("3st Enemy")
         return('3-2')
 
-class 3-2(Locations):
+class Loc32(Locations):
     def start_location(self):
         print("Boss_3")
         return('3-3')
 
-class 3-3(Locations):
+class Loc33(Locations):
     def start_location(self):
         print("3st Enemy")
         return('last_boss')
@@ -143,6 +122,32 @@ class TheEnd(Locations):
     def start_location(self):
         print("Congrats, you beat the game!")
         return('last_location')
+
+class Map(object):
+
+    locations = {
+        '1-1':Loc11(),
+        '1-2':Loc12(),
+        '1-3':Loc13(),
+        '2-1':Loc21(),
+        '2-2':Loc22(),
+        '2-3':Loc23(),
+        '3-1':Loc31(),
+        '3-2':Loc32(),
+        '3-3':Loc33(),
+        'last_boss':LastBoss(),
+        'death':Death(),
+        'last_location':TheEnd()
+
+    }
+    def __init__(self, next_location):
+        self.next_location = next_location
+
+    def next_location_val(self, location_name):
+        loc = Map.locations.get(location_name)
+
+    def start_next_location(self):
+        return self.next_location_val(self.next_location)
 
 
 ##runner

@@ -18,6 +18,7 @@ class Engine(object):
     def play(self):
         #current_scene = Map('central_corridor').opening_scene() = CentralCorridor()
         current_scene = self.scene_map.opening_scene()
+
         #last_scene = Map('finished').opening_scene() = Finished()
         last_scene = self.scene_map.next_scene('finished')
 
