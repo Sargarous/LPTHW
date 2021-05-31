@@ -13,19 +13,15 @@ class Engine(object):
         self.location_map = location_map
 
     def play(self):
-        i = 0
         current_location = self.location_map.start_next_location()
         print(current_location)
         last_location = self.location_map.next_location_val('last_location')
         print(last_location)
         while current_location != last_location:
-            print(i)
-            next_loc_name = current_location.enter()
+            next_loc_name = current_location.start_location()
             current_location = self.location_map.next_location_val(next_loc_name)
-            print(i)
-            i += 1
-
-
+        current_location.start_location()
+        
 class Character(object):
 
     # def __init__(self, name, strength, health, dexterity):
@@ -102,10 +98,11 @@ class Loc33(Locations):
         print("3st Enemy")
         return('last_boss')
 
-class LastBoss(Character):
+class LastBoss(Locations):
     def start_location(self):
         print("Boss")
-        print("""Bug ugly troll stand before you and u can smell his rotten breath.
+        print(dedent("""
+                Bug ugly troll stand before you and u can smell his rotten breath.
                 It take some thime before he notice you and turn his head in your
                 direction. Seems he studiyng you for some time and you almost can swear
                 that for breef of moment you saw grimm smile on his face.
@@ -116,12 +113,13 @@ class LastBoss(Character):
                 With a corner of you eyes you saw a swirt blink, you jump backward and
                 was rly surprised by dexterity and speed of creature of this size. Time
                 for final fight!
-            """)
+                """))
+        return ('last_location')
 
 class TheEnd(Locations):
     def start_location(self):
         print("Congrats, you beat the game!")
-        return('last_location')
+        exit(1)
 
 class Map(object):
 
@@ -145,7 +143,7 @@ class Map(object):
 
     def next_location_val(self, location_name):
         loc = Map.locations.get(location_name)
-
+        return loc
     def start_next_location(self):
         return self.next_location_val(self.next_location)
 
