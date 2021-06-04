@@ -3,6 +3,14 @@ from sys import exit
 from random import randint
 from textwrap import dedent
 
+class Reader(object):
+    n = raw_input()
+    print "enter pathway of file"
+    p = raw_input()
+
+    print "creating a new text file"
+    new_file = open(p, "w")  #the error on this line
+
 class Save(object):
     def __init__(self, file_name):
         file = os.scandir('game/')
@@ -21,7 +29,7 @@ class Engine(object):
             next_loc_name = current_location.start_location()
             current_location = self.location_map.next_location_val(next_loc_name)
         current_location.start_location()
-        
+
 class Character(object):
 
     # def __init__(self, name, strength, health, dexterity):
