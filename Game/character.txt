@@ -1,0 +1,5 @@
+Name      HP  STR  DEF  DEX
+Cobold     8    2    1    5
+Goblin    20    4    2    6
+Gnoll     31    6    5    4
+Sargarus  99    12   6    9

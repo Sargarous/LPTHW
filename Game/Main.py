@@ -4,12 +4,43 @@ from random import randint
 from textwrap import dedent
 
 class Reader(object):
-    n = raw_input()
-    print "enter pathway of file"
-    p = raw_input()
 
-    print "creating a new text file"
-    new_file = open(p, "w")  #the error on this line
+    def __init__(self, file_name):
+        self.file_name = file_name
+
+    def character_stats(self, character):
+        file = open(self.file_name, 'r')
+        for char in file:
+            line = char.split()
+            if line[0] == character:
+                return line
+
+class Battle(object):
+
+    def __init__(self, player, enemy):
+        self.player = player
+        self.enemy = enemy
+
+    def start_battle(self):
+        load_stats = Reader('character.txt')
+        player_stats = load_stats.character_stats(player)
+        enemy_stats = load_stats.character_stats(enemy)
+
+        player_name = player_stats[0]
+        player_HP = int(player_stats[1])
+        player_STR = int(player_stats[2])
+        player_DEF = int(player_stats[3])
+        player_DEX = int(player_stats[4])
+
+        enemy_name = enemy_stats[0]
+        enemy_HP = int(enemy_stats[1])
+        enemy_STR = int(enemy_stats[2])
+        enemy_DEF = int(enemy_stats[3])
+        enemy_DEX = int(enemy_stats[4])
+
+        
+
+
 
 class Save(object):
     def __init__(self, file_name):
@@ -62,7 +93,7 @@ class Death(Locations):
 
 class Loc11(Locations):
     def start_location(self):
-        print("1st Enemy")
+        print("Goblin")
         return('1-2')
 
 class Loc12(Locations):
