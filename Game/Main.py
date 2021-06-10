@@ -2,51 +2,64 @@ import os
 from sys import exit
 from random import randint
 from textwrap import dedent
+import numpy as np
 
-class Reader(object):
+class Randomizer():
+    def __init__(self, max_number)
+        self.max_number = max_number
+    return random.randint(0, max_number)
+
+class Reader():
 
     def __init__(self, file_name):
         self.file_name = file_name
 
-    def character_stats(self, character):
-        file = open(self.file_name, 'r')
-        for char in file:
-            line = char.split()
-            if line[0] == character:
-                return line
+        def character_stats(self, character):
+            file = open(self.file_name, 'r')
+            stats_array = []
+            for char in file:
+                line = char.split()
+                if line[0] == character:
+                    for i in range(len(line)):
+                        if i == 0:
+                            i += 1
+                        elif i == 1:
+                            continue
+                        stat = int(line[i])
+                        stats_array.append(stat)
+                    return stats_array
 
-class Battle(object):
+class Battle():
 
     def __init__(self, player, enemy):
         self.player = player
         self.enemy = enemy
 
+    load_stats = Reader('character.txt')
+    player_stats = load_stats.character_stats(player)
+    enemy_stats = load_stats.character_stats(enemy)
+## attacker 0 - player attack enemy, 1 - enemy
+    def attack(self, player_stats, enemy_stats, attacker):
+        if attacker == 0:
+
+
+    def defence():
+        pass
+
+    def heal():
+        pass
+
     def start_battle(self):
         load_stats = Reader('character.txt')
         player_stats = load_stats.character_stats(player)
         enemy_stats = load_stats.character_stats(enemy)
+        return player_stats, enemy_stats
 
-        player_name = player_stats[0]
-        player_HP = int(player_stats[1])
-        player_STR = int(player_stats[2])
-        player_DEF = int(player_stats[3])
-        player_DEX = int(player_stats[4])
-
-        enemy_name = enemy_stats[0]
-        enemy_HP = int(enemy_stats[1])
-        enemy_STR = int(enemy_stats[2])
-        enemy_DEF = int(enemy_stats[3])
-        enemy_DEX = int(enemy_stats[4])
-
-        
-
-
-
-class Save(object):
+class Save():
     def __init__(self, file_name):
         file = os.scandir('game/')
 
-class Engine(object):
+class Engine():
 
     def __init__(self, location_map):
         self.location_map = location_map
@@ -61,7 +74,7 @@ class Engine(object):
             current_location = self.location_map.next_location_val(next_loc_name)
         current_location.start_location()
 
-class Character(object):
+class Character():
 
     # def __init__(self, name, strength, health, dexterity):
     #     self.name = name
@@ -160,7 +173,7 @@ class TheEnd(Locations):
         print("Congrats, you beat the game!")
         exit(1)
 
-class Map(object):
+class Map():
 
     locations = {
         '1-1':Loc11(),

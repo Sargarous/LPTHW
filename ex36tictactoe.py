@@ -127,11 +127,11 @@ def gameplay(P1, P2, first_move):
                 playing_field_display()
             winner = victory_check(field_rows)
             if  winner == p1_sign:
-                print(f"Congrts, {p1} is winner of this match!")
+                print(f"Congrats, {p1} is winner of this match!")
                 print(f"Sad for you, mr.{p2}")
                 break
             elif winner == p2_sign:
-                print(f"Congrts, {p2} is winner of this match!")
+                print(f"Congrats, {p2} is winner of this match!")
                 print(f"Sad for you, mr.{p1}")
                 break
             elif not winner and i == 8:
