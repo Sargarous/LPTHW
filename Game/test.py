@@ -1,6 +1,7 @@
 import os
+import time
 from sys import exit
-from random import randint
+import random
 from textwrap import dedent
 import numpy as np
 
@@ -33,50 +34,68 @@ class Battle(object):
         self.player = player
         self.enemy = enemy
 
-    def x (self):
-        print(self.enemy)
-
-    load_stats = Reader('character.txt')
-    player_stats = load_stats.character_stats(player)
-    enemy_stats = load_stats.character_stats(enemy)
-
-    if player_stats[5] > enemy_stats[5]:
-        first_move = True
-    else:
-        first_move = False
-
     def randomizer(self, max):
-        return random.randint(1, max)
+        return random.randint(3, max)
 
-    def dex_roll(self, dex):
-        return dex + randomizer(20)
-
-    def damage_calc(self):
-        pass
-
-    def turn(self, move):
-        if move:
-            attacker = self.player
-            attacker_stats = self.player_stats
-            defender = self.enemy
-            defender_stats = self.enemy_stats
-        else:
-            attacker = self.enemy
-            attacker_stats = self.enemy_stats
-            defender = self.player
-            defender_stats = self.player_stats
-        return attacker, attacker_stats, defender, defender_stats
+    def progress_bar(self):
+        for i in range (0, 8):
+            time.sleep(random.uniform(0.1, 0.6))
+            print("-", sep = ' ', end = '', flush = True)
 ## attacker 0 - player attack enemy, 1 - reevers
 ## target_action 0  - dodge, 1 - def, 3- heal
-    def attack(self, target_action):
-        flag = True
-        while self.player_stats[2] > 0 or self.enemy_stats[2] > 0:
-            print(turn(flag).attacker_stats)
-            turn(flag).attacker_stats[2] - 1
-            if flag:
-                flag = False
+    def attack(self):
+        move = False
+        load_stats = Reader('character.txt')
+        player_stats = load_stats.character_stats(self.player)
+        enemy_stats = load_stats.character_stats(self.enemy)
+        if player_stats[3] > enemy_stats[3]:
+            move = True
+        while True:
+            if move:
+                attacker = self.player
+                attacker_stats = player_stats
+
+                defender = self.enemy
+                defender_stats = enemy_stats
+
+                print(f"{attacker} attack {defender}")
+                print(f"{defender} health: {defender_stats[0]}")
+                self.progress_bar()
+                print('\n')
+                if self.randomizer(attacker_stats[3] * 2) < self.randomizer(defender_stats[3]):
+                    print(f"{defender} dodge strike from {attacker}.\n")
+                else:
+                    damage = attacker_stats[1] + self.randomizer(attacker_stats[3]) - defender_stats[2]
+                    defender_stats[0] = defender_stats[0] - damage
+                    print(f"{attacker} hit {defender} with the sword, {defender} lost {damage} health.")
+                    print(f"{defender} HP: {defender_stats[0]}\n")
+
             else:
-                flag = True
+                attacker = self.enemy
+                attacker_stats = enemy_stats
+
+                defender = self.player
+                defender_stats = player_stats
+
+                print(f"{attacker} attack {defender}")
+                self.progress_bar()
+                print('\n')
+                if self.randomizer(attacker_stats[3] * 2) < self.randomizer(defender_stats[3]):
+                    print(f"{defender} dodge strike {attacker}.\n")
+                else:
+                    damage = attacker_stats[1] + self.randomizer(attacker_stats[3]) - defender_stats[2]
+                    defender_stats[0] = defender_stats[0] - damage
+                    print(f"{attacker} hit {defender} with the sword, {defender} lost {damage} health.")
+                    print(f"{defender} HP: {defender_stats[0]}\n")
+
+            if move:
+                move = False
+            else:
+                move = True
+
+            if player_stats[0] <= 0 or enemy_stats[0] <= 0:
+                print(f"{attacker} win!")
+                break
             # if dex_roll(self.attacker_stats[5]) < dex_roll(self.defender_stats[5]):
             #     print(f"{self.attacker} miss!")
             # else:
@@ -85,4 +104,4 @@ class Battle(object):
 
 
 test = Battle('Sargarus', 'Gnoll')
-# test.start_battle()
+test.attack()

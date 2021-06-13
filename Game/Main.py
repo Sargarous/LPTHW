@@ -4,11 +4,6 @@ from random import randint
 from textwrap import dedent
 import numpy as np
 
-class Randomizer():
-    def __init__(self, max_number)
-        self.max_number = max_number
-    return random.randint(0, max_number)
-
 class Reader():
 
     def __init__(self, file_name):
@@ -38,10 +33,15 @@ class Battle():
     load_stats = Reader('character.txt')
     player_stats = load_stats.character_stats(player)
     enemy_stats = load_stats.character_stats(enemy)
+
+    def randomizer(max):
+        return random.randint(1, max)
+
 ## attacker 0 - player attack enemy, 1 - enemy
     def attack(self, player_stats, enemy_stats, attacker):
         if attacker == 0:
-
+            if enemy_stats[5] + randomizer(20) > player_stats[4] + randomizer(20):
+                print(f"{self.player} miss!")
 
     def defence():
         pass
@@ -49,11 +49,6 @@ class Battle():
     def heal():
         pass
 
-    def start_battle(self):
-        load_stats = Reader('character.txt')
-        player_stats = load_stats.character_stats(player)
-        enemy_stats = load_stats.character_stats(enemy)
-        return player_stats, enemy_stats
 
 class Save():
     def __init__(self, file_name):
