@@ -3,17 +3,17 @@ try:
 except ImportError:
     from distutils.core import setup
 
-sonfig = {
-    'description': 'My Project',
-    'author': 'My Name',
+config = {
+    'description': 'Roll2',
+    'author': 'Sargarus',
     'url': 'URL to get it at.',
     'download_url': 'Where to download it.',
-    'author_email': 'My email',
+    'author_email': 'shagohod@list.ru',
     'version': '0.1',
-    'install_requires':['nose'],
-    'packages': ['NAME'],
-    'scripts': [],
-    'name': 'projectname'
+    'install_requires':'nose',
+    'packages': 'roll20',
+    'scripts': 'bin\roll.py',
+    'name': 'roll.py'
 }
 
 setup(**config)

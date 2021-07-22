@@ -1,5 +1,5 @@
 from nose.tools import*
-import NAME
+import roll20
 
 def setup():
     print("SETUP!")
