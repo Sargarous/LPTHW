@@ -1,0 +1,11 @@
+.
+setup.py
+/
+roll.py.egg-info/PKG-INFO
+roll.py.egg-info/SOURCES.txt
+roll.py.egg-info/dependency_links.txt
+roll.py.egg-info/requires.txt
+roll.py.egg-info/top_level.txt
+roll20/__init__.py
+tests/__init__.py
+tests/roll20_tests.py

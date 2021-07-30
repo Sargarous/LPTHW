@@ -1,0 +1,9 @@
+setup.py
+bin/roll.py
+roll20/__init__.py
+roll20/__main__.py
+roll20.egg-info/PKG-INFO
+roll20.egg-info/SOURCES.txt
+roll20.egg-info/dependency_links.txt
+roll20.egg-info/requires.txt
+roll20.egg-info/top_level.txt
