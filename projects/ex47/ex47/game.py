@@ -7,7 +7,6 @@ class Room(object):
 
     def go(self, direction):
         dir = self.paths.get(direction, None)
-        print(f"we go in {dir} dir")
         return dir
 
     def add_paths(self, paths):
